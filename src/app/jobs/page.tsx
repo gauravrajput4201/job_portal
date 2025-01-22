@@ -4,11 +4,12 @@ import Navbar from "@/components/navbar/navbar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-export default function Home() {
+export default function Jobs() {
   return (
     <>
-      {/* <Navbar />
       <div className=" min-h-screen p-8 pb-20 gap-16 sm:p-20 flex ">
+        {/* <Button variant={"destructive"}>Click me</Button> */}
+
         <div className="basis-56">
           <Filters />
         </div>
@@ -56,8 +57,7 @@ export default function Home() {
 
           <JobList />
         </div>
-      </div> */}
-      <div>home page</div>
+      </div>
     </>
   );
 }
