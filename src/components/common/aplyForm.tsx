@@ -15,50 +15,50 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { CloudUpload, Paperclip } from "lucide-react";
+import {
+  FileInput,
+  FileUploader,
+  FileUploaderContent,
+  FileUploaderItem,
+} from "../ui/extension/file-upload";
+import useStore from "@/store/store";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   fullName: z.string().nonempty("Full Name is required"),
   email: z.string().email("Invalid email address"),
-  resume: z
-    .any()
-    .refine(
-      (file) => file && file.length === 1 && file[0]?.size <= 1024 * 1024 * 4,
-      {
-        message: "File is required and must be less than 4MB",
-      }
-    )
-    .refine(
-      (file) =>
-        file &&
-        ["application/pdf", "image/png", "image/jpeg"].includes(file[0]?.type),
-      {
-        message: "Only PDF, PNG, and JPG files are allowed",
-      }
-    ),
+  resume: z.string(),
 });
 
-export default function MyForm() {
+export default function ApplyForm(props: any) {
+  const router = useRouter();
+  const { jobId } = props;
   const [files, setFiles] = useState<File[] | null>(null);
+  const filters = useStore((state) => state.filters);
+  const addFilter = useStore((state) => state.addFilter);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      resume: "",
+    },
   });
-
-  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setFiles(Array.from(event.target.files));
-      form.setValue("resume", event.target.files); // Sync with react-hook-form
-    }
+  const dropZoneConfig = {
+    maxFiles: 1,
+    maxSize: 1024 * 1024 * 4,
+    multiple: false,
   };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
+      if (!filters.includes(jobId)) {
+        addFilter(jobId);
+
+        toast.success("job apply successfully");
+        router.push("/jobs");
+      }
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -95,47 +95,48 @@ export default function MyForm() {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name="resume"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Upload Resume</FormLabel>
+              <FormLabel>Select Resume</FormLabel>
               <FormControl>
-                <div>
-                  <div className="relative bg-background rounded-lg p-2">
-                    <label
-                      htmlFor="resume"
-                      className="flex items-center justify-center flex-col p-8 w-full border-dashed border-2 border-slate-500 cursor-pointer"
-                    >
+                <FileUploader
+                  value={files}
+                  onValueChange={setFiles}
+                  dropzoneOptions={dropZoneConfig}
+                  className="relative bg-background rounded-lg p-2"
+                >
+                  <FileInput
+                    id="fileInput"
+                    className="outline-dashed outline-1 outline-slate-500"
+                    {...field}
+                  >
+                    <div className="flex items-center justify-center flex-col p-8 w-full ">
                       <CloudUpload className="text-gray-500 w-10 h-10" />
                       <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
                         <span className="font-semibold">Click to upload</span>
                         &nbsp; or drag and drop
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
-                        PDF, PNG, JPG (Max 4MB)
+                        SVG, PNG, JPG or GIF
                       </p>
-                    </label>
-                    <input
-                      id="resume"
-                      type="file"
-                      className="hidden"
-                      accept=".pdf, .png, .jpg, .jpeg"
-                      onChange={onFileChange}
-                    />
-                  </div>
-                  {files &&
-                    files.length > 0 &&
-                    files.map((file, index) => (
-                      <div key={index} className="mt-2 flex items-center gap-2">
-                        <Paperclip className="h-4 w-4" />
-                        <span>{file.name}</span>
-                      </div>
-                    ))}
-                </div>
+                    </div>
+                  </FileInput>
+                  <FileUploaderContent>
+                    {files &&
+                      files.length > 0 &&
+                      files.map((file, i) => (
+                        <FileUploaderItem key={i} index={i}>
+                          <Paperclip className="h-4 w-4 stroke-current" />
+                          <span>{file.name}</span>
+                        </FileUploaderItem>
+                      ))}
+                  </FileUploaderContent>
+                </FileUploader>
               </FormControl>
+
               <FormMessage />
             </FormItem>
           )}

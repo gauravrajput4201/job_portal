@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
+import { redirect } from "next/navigation";
 
 export default function JobList() {
   return (
@@ -10,10 +11,11 @@ export default function JobList() {
           <div className="flex gap-4">
             <div>
               <Image
-                height={30}
-                width={30}
+                height={60}
+                width={60}
                 alt="logo"
-                src="https://jobicy.com/data/server-nyc0409/galaxy/mercury/2023/03/fe39c2bc9bb5ebb0b5e24318b1f3b60d.jpeg"
+                src="https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg"
+                // src="https://jobicy.com/data/server-nyc0409/galaxy/mercury/2023/03/fe39c2bc9bb5ebb0b5e24318b1f3b60d.jpeg"
               />
             </div>
             <div>
@@ -45,15 +47,12 @@ export default function JobList() {
             <span className=" rounded-full bg-emerald-50 text-emerald-700 px-3 py-px text-sm">
               React
             </span>
-            {/* <div className="bg-emerald-50 text-emerald-700 text-xs rounded-full p-[3px] px-4">
-              Software
-            </div>
-            <div className="bg-emerald-50 text-emerald-700 text-xs rounded-full p-[3px] px-4">
-              React
-            </div> */}
           </div>
           <div>
-            <Button className="rounded-full p-4 bg-yellow-200 text-black px-8 hover:bg-yellow-300">
+            <Button
+              className="rounded-full p-4 bg-yellow-200 text-black px-8 hover:bg-yellow-300"
+              onClick={() => redirect(`/jobs/${1}`)}
+            >
               Apply
             </Button>
           </div>
