@@ -3,6 +3,7 @@
 import ApplyForm from "@/components/common/aplyForm";
 import { BreadcrumbWithCustomSeparator } from "@/components/common/breadCrumb";
 import Image from "next/image";
+import useSWR from "swr";
 
 import {
   Dialog,
@@ -16,6 +17,7 @@ import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import useStore from "@/store/store";
+const fetcher = (url: any) => fetch(url).then((r) => r.json());
 function JobDetails() {
   const [visible, setVisible] = useState(false);
   const params = useParams<any>();
@@ -25,11 +27,18 @@ function JobDetails() {
       setVisible(!visible);
     }
   };
+  const { data, error, isLoading } = useSWR(
+    `https://fakejobs-api.vercel.app/jobs/${params?.jobId}`,
+    fetcher
+  );
 
+  if (isLoading) return <div className="absolute h-full w-full top-0 left-0 bg-white text-black text-3xl text-center mt-[20%]">Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  console.log(data, data);
   return (
     <>
       <BreadcrumbWithCustomSeparator />
-      <div className="flex justify-between items-center px-20 bg-[#e8f2f1] py-14 ">
+      <div className="flex sm:justify-between sm:items-center flex-col sm:flex-row  sm:gap-3 p-8  lg:px-20 bg-[#e8f2f1] py-14  ">
         <div className="flex gap-4">
           <div>
             <Image
@@ -40,22 +49,29 @@ function JobDetails() {
             />
           </div>
           <div>
-            <h2 className="m-0 text-3xl">Investor Quality</h2>
-            <span className=" text-[#225e57] text-lg">Norway</span>
+            <h2 className="m-0 text-xl sm:text-3xl">{data?.company?.name}</h2>
+            <span className=" text-[#225e57] text-base sm:text-lg">{data?.location}</span>
           </div>
         </div>
-        <div className="text-right">
-          <span className="text-2xl text-right">$2k - $9k</span>
-          <div className="text-lg text-[#225e57] text-right">
+        <div className="sm:text-right mt-4 sm:mt-0">
+          <span className="sm:text-2xl text-lg text-right">{data?.salary}</span>
+          <div className=":sm:text-lg text-sm text-[#225e57] sm:text-right">
             Posted 2 years
           </div>
         </div>
       </div>
-
-      <div className=" p-8 pb-2  sm:px-20 sm:pb-2 ">
-        <div>job id is {params?.jobId}</div>;
+      <div className=" p-8 pb-3  lg:px-20">
+        <h3 className="font-bold text-2xl">Overview</h3>
+        <p className="text-lg mt-3">{data?.company?.description}</p>
       </div>
-      <div className="w-full text-center">
+      <div className=" p-8 pb-3   lg:px-20">
+        <h3 className="font-bold text-2xl">Job description</h3>
+        <p className="text-lg mt-3 text-[#111827]">{data?.description}</p>
+      </div>
+      {/* <div className=" p-8 pb-2  sm:px-20 sm:pb-2 ">
+        <div>job id is {params?.jobId}</div>;
+      </div> */}
+      <div className="w-full text-center my-10">
         <Button
           className="rounded-full  bg-yellow-200 text-black text-base hover:bg-yellow-300 px-8 py-6 "
           onClick={() => canApply(params?.jobId)}
@@ -66,11 +82,11 @@ function JobDetails() {
         </Button>
       </div>
       <Dialog open={visible} onOpenChange={() => setVisible(!visible)}>
-        <DialogContent>
+        <DialogContent className="w-11/12 max-w-[500px]">
           <DialogHeader>
             <DialogTitle>Job Application</DialogTitle>
             <DialogDescription>
-              Global Communications Associate
+              {data?.company?.name}
             </DialogDescription>
           </DialogHeader>
           <ApplyForm jobId={params?.jobId} />

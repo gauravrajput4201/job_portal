@@ -11,8 +11,8 @@ export default async function Navbar() {
   // console.log({ session });
   return (
     <nav className="flex justify-between items-center py-3 px-4 bg-white shadow-md">
-      <Link href="/" className="text-xl font-bold">
-        Auth.js
+      <Link href="/jobs" className="text-xl font-bold">
+        Job Portal
       </Link>
       {/* {!session ? (
                 <Link href="/auth/signin">

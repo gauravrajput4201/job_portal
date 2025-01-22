@@ -12,7 +12,7 @@ import {
 export function BreadcrumbWithCustomSeparator() {
   return (
     <div>
-      <Breadcrumb className="w-full px-20 py-4 bg-gray-100">
+      <Breadcrumb className="w-full p-8  lg:px-20 py-4 bg-gray-100">
         <BreadcrumbList>
           <BreadcrumbItem>
             {/* <BreadcrumbLink> */}

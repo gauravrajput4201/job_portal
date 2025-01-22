@@ -27,7 +27,7 @@ import { useRouter } from "next/navigation";
 const formSchema = z.object({
   fullName: z.string().nonempty("Full Name is required"),
   email: z.string().email("Invalid email address"),
-  resume: z.string(),
+  resume: z.string().nonempty("This is require field"),
 });
 
 export default function ApplyForm(props: any) {
@@ -67,7 +67,7 @@ export default function ApplyForm(props: any) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 py-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 py-5">
         <FormField
           control={form.control}
           name="fullName"

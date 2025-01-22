@@ -1,9 +1,10 @@
 "use client";
 import Filters from "@/components/common/filters";
 import JobList from "@/components/common/joblist";
-import Navbar from "@/components/navbar/navbar";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import useStore from "@/store/store";
+import { Filter, Search } from "lucide-react";
 import useSWR from "swr";
 
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
@@ -13,18 +14,44 @@ export default function Jobs() {
     fetcher
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="absolute h-full w-full top-0 left-0 bg-white text-black text-3xl text-center mt-[20%]">Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  console.log(data, data);
+
+
+  const getUniqueByTitle = (jsonArray: any[]) => {
+    const uniqueTitles = new Set();
+    const uniqueArray: any = [];
+
+    jsonArray.forEach(item => {
+      if (!uniqueTitles.has(item.title)) {
+        uniqueTitles.add(item.title);
+        uniqueArray.push(item);
+      }
+    });
+
+    return uniqueArray;
+  }
+  const filterArr: any = getUniqueByTitle(data)
 
   return (
     <>
-      <div className=" min-h-screen p-8 pb-20 gap-16 sm:p-20 flex ">
-        <div className="basis-56">
-          <Filters />
+      <div className=" min-h-screen p-8 pb-20  lg:p-20 lg:flex lg:gap-16 ">
+        <div className="hidden lg:basis-56 lg:block">
+          <Filters filterArr={filterArr} />
         </div>
-        <div className="basis-full">
-          <div className="w-full  mb-4">
+        <div className="lg:hidden mb-2 text-end">
+          <Popover>
+            <PopoverTrigger className="">
+              <Filter className="cursor-pointer hover:text-gray-500" />
+            </PopoverTrigger>
+            <PopoverContent className="p-2 rounded-sm max-w-[220px] mr-3">
+              <Filters filterArr={filterArr} />
+            </PopoverContent>
+          </Popover>
+
+        </div>
+        <div className="basis-full ">
+          {/* <div className="w-full  mb-4">
             <label
               htmlFor="default-search"
               className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -45,8 +72,8 @@ export default function Jobs() {
                 Search
               </Button>
             </div>
-          </div>
-          <JobList />
+          </div> */}
+          <JobList data={data} />
         </div>
       </div>
     </>
