@@ -15,7 +15,6 @@ export default function JobList() {
                 width={60}
                 alt="logo"
                 src="https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg"
-                // src="https://jobicy.com/data/server-nyc0409/galaxy/mercury/2023/03/fe39c2bc9bb5ebb0b5e24318b1f3b60d.jpeg"
               />
             </div>
             <div>

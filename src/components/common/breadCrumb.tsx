@@ -11,22 +11,24 @@ import {
 
 export function BreadcrumbWithCustomSeparator() {
   return (
-    <Breadcrumb className="w-full px-20 py-4 bg-gray-100">
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink>
+    <div>
+      <Breadcrumb className="w-full px-20 py-4 bg-gray-100">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            {/* <BreadcrumbLink> */}
             <Link href="/jobs">Home</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink>Job Details</BreadcrumbLink>
-        </BreadcrumbItem>
-        {/* <BreadcrumbSeparator />
+            {/* </BreadcrumbLink> */}
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink>Job Details</BreadcrumbLink>
+          </BreadcrumbItem>
+          {/* <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
         </BreadcrumbItem> */}
-      </BreadcrumbList>
-    </Breadcrumb>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
   );
 }

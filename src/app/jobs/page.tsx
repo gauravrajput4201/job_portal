@@ -4,8 +4,19 @@ import JobList from "@/components/common/joblist";
 import Navbar from "@/components/navbar/navbar";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
+import useSWR from "swr";
 
+const fetcher = (url: any) => fetch(url).then((r) => r.json());
 export default function Jobs() {
+  const { data, error, isLoading } = useSWR(
+    "https://fakejobs-api.vercel.app/jobs",
+    fetcher
+  );
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  console.log(data, data);
+
   return (
     <>
       <div className=" min-h-screen p-8 pb-20 gap-16 sm:p-20 flex ">
