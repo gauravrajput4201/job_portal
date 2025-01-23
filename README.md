@@ -1,3 +1,4 @@
+
 # Job Portal
 
 A dynamic and user-friendly Job Portal platform where users can:
@@ -12,8 +13,8 @@ Apply for jobs directly.
 
 View jobs they have already applied for.
 
-## Features
 
+## Features
     1. Job Listing:
         Users can view a complete list of available job positions.
     2. Job Details:
@@ -26,7 +27,6 @@ View jobs they have already applied for.
         If already applied, the system will notify the user.
     5. Applied Jobs View:
         sers can see a list of jobs they’ve already applied for.
-
 ## Installation
 
 Follow the steps below to set up the project on your local machine:
@@ -35,17 +35,24 @@ Follow the steps below to set up the project on your local machine:
  git clone <repository-url>
 cd <repository-folder>
 ```
-
+    
 ## Install Dependencies
 
 Run the following command to install all necessary dependencies:
 
     npm install
 
+
 ## Run the Application
 
     npm run dev
 
+
+
+## ⚠️ GitHub Login Warning
+
+    Always run http://localhost:3000 for GitHub Authentication during development."
+    GitHub OAuth requires the redirect URL to match exactly. Ensure that the development server is running on http://localhost:3000 to avoid mismatched redirect errors.
 ## Documentation
 
 Architecture and Design
@@ -53,6 +60,7 @@ Architecture and Design
 **High-Level Overview**
 
 The project is a Job Portal application built with modern web technologies to provide an efficient and seamless user experience.
+
 
 ## Technology Stack
 
@@ -66,10 +74,10 @@ The project is a Job Portal application built with modern web technologies to pr
 
 **State Management:** Zustand for lightweight and scalable state management.
 
+
 ## Frontend Architecture
 
 **Next.js Pages and Routing**
-
 - Dynamic routes for job details (/jobs/[id]).
 
 **Reusable Components**
@@ -88,6 +96,7 @@ Zustand provides a simple and lightweight way to manage application state withou
 
 - Example: Validating job application inputs like name, email, and resume.
 
+
 **UI Design with ShadCN and Tailwind CSS**
 
 - ShadCN Components: Modular UI elements like buttons, inputs, modals, and dropdowns.
@@ -104,25 +113,27 @@ The application includes the following authentication methods
 
 - **GitHub Login:** Integrated GitHub OAuth for user authentication. Users can log in with their GitHub account for a seamless experience.
 
-**User Interaction**
 
+**User Interaction**
 - The user visits the homepage to browse job listings.
 - Filters and search functionality are managed using Zustand for global state.
 
 **Server-Side Data Fetching**
-
-- Next.js fetches jobs from the database using server-side rendering
+- Next.js fetches jobs from the database using server-side rendering 
 
 **Validation and Application Submission**
-
 - Zod validates application forms before sending data
+
+
+
+
 
 ## Issues Faced During Development
 
 **Hydration Issue in Next.js**
 
 Cause: Mismatched server-side and client-side rendering due to dynamic data (e.g., user-specific data or time-sensitive content).
-
 ## Support
 
 For questions or support, feel free to reach out at [singhkumargaurav420@gmail.com].
+
