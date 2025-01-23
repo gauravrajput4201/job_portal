@@ -96,6 +96,14 @@ Zustand provides a simple and lightweight way to manage application state withou
 
 ## Workflow
 
+**Authentication**
+
+The application includes the following authentication methods
+
+- **Static Login:** Users can log in using a static email and password for development purposes.
+
+- **GitHub Login:** Integrated GitHub OAuth for user authentication. Users can log in with their GitHub account for a seamless experience.
+
 **User Interaction**
 
 - The user visits the homepage to browse job listings.
@@ -108,3 +116,13 @@ Zustand provides a simple and lightweight way to manage application state withou
 **Validation and Application Submission**
 
 - Zod validates application forms before sending data
+
+## Issues Faced During Development
+
+**Hydration Issue in Next.js**
+
+Cause: Mismatched server-side and client-side rendering due to dynamic data (e.g., user-specific data or time-sensitive content).
+
+## Support
+
+For questions or support, feel free to reach out at [singhkumargaurav420@gmail.com].

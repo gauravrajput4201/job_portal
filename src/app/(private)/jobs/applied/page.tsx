@@ -11,32 +11,22 @@ import { filterByIds } from "@/utils/utility";
 import { Card } from "@/components/ui/card";
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
 function AppliedJob() {
-    const [visible, setVisible] = useState(false);
-    const params = useParams<any>();
     const filters = useStore((state) => state.items);
-    const canApply = (id: any) => {
-        if (!filters.includes(id)) {
-            setVisible(!visible);
-        }
-    };
     const { data, error, isLoading } = useSWR(
         `https://fakejobs-api.vercel.app/jobs/`,
         fetcher
     );
-
     if (isLoading) return <div className="absolute h-full w-full top-0 left-0 bg-white text-black text-3xl text-center mt-[20%]">Loading...</div>;
     if (error) return <div className="absolute h-full w-full top-0 left-0 bg-white text-black text-3xl text-center mt-[20%]">{error}</div>;
-    // console.log(data, data);
     const filterData: any = filterByIds(data, filters)
     return (
         <>
             <BreadcrumbWithCustomSeparator title={"Applied Job"} />
             <div className=" p-8  lg:px-20">
-
                 {filterData?.length > 0 ? (
                     filterData.map((item: any) => (
                         <Card className="w-full p-5 mb-3" key={item?.id}>
-                            <div className="flex   gap-3 flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <div className="flex   gap-3 flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-0">
                                 <div className="flex gap-4">
                                     <div>
                                         <Image

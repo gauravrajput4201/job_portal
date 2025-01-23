@@ -62,7 +62,8 @@ import { Button } from "@/components/ui/button";
 import { object, string } from "zod";
 import { Github } from "lucide-react";
 import { signIn } from "next-auth/react";
-
+import { toast } from "sonner";
+import { redirect, useRouter } from "next/navigation";
 const signInSchema = object({
   email: string({ required_error: "Email is required" })
     .min(1, "Email is required")
@@ -82,14 +83,27 @@ export default function SignIn() {
   });
 
   const onSubmit = async (values: z.infer<typeof signInSchema>) => {
-    // try {
-    //   const result = await handleCredentialsSignin(values);
-    //   if (result?.message) {
-    //     setGlobalError(result.message);
-    //   }
-    // } catch (error) {
-    //   console.log("An unexpected error occurred. Please try again.");
+    const { email, password } = values;
+
+
+    const response: any = await signIn("credentials", {
+      email,
+      password,
+      redirectTo: "/jobs"
+      // redirectTo: "/jobs"
+    });
+    console.log({ response });
+    // if (response.ok) {
+    //   redirect(`/jobs`)
     // }
+
+    // if (!response.ok) {
+    //   throw new Error("Network response was not ok");
+    // }
+    // Process response here
+    // console.log("Login Successful", response);
+    toast.success("Login Successful");
+
   };
 
   return (
