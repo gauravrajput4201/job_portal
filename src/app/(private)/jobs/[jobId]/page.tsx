@@ -21,9 +21,9 @@ const fetcher = (url: any) => fetch(url).then((r) => r.json());
 function JobDetails() {
   const [visible, setVisible] = useState(false);
   const params = useParams<any>();
-  const filters = useStore((state) => state.filters);
+  const items = useStore((state) => state.items);
   const canApply = (id: any) => {
-    if (!filters.includes(id)) {
+    if (!items.includes(id)) {
       setVisible(!visible);
     }
   };
@@ -31,13 +31,12 @@ function JobDetails() {
     `https://fakejobs-api.vercel.app/jobs/${params?.jobId}`,
     fetcher
   );
-
   if (isLoading) return <div className="absolute h-full w-full top-0 left-0 bg-white text-black text-3xl text-center mt-[20%]">Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div className="absolute h-full w-full top-0 left-0 bg-white text-black text-3xl text-center mt-[20%]">{error}</div>;
   console.log(data, data);
   return (
     <>
-      <BreadcrumbWithCustomSeparator />
+      <BreadcrumbWithCustomSeparator title={"Job Details"} />
       <div className="flex sm:justify-between sm:items-center flex-col sm:flex-row  sm:gap-3 p-8  lg:px-20 bg-[#e8f2f1] py-14  ">
         <div className="flex gap-4">
           <div>
@@ -68,15 +67,13 @@ function JobDetails() {
         <h3 className="font-bold text-2xl">Job description</h3>
         <p className="text-lg mt-3 text-[#111827]">{data?.description}</p>
       </div>
-      {/* <div className=" p-8 pb-2  sm:px-20 sm:pb-2 ">
-        <div>job id is {params?.jobId}</div>;
-      </div> */}
+
       <div className="w-full text-center my-10">
         <Button
           className="rounded-full  bg-yellow-200 text-black text-base hover:bg-yellow-300 px-8 py-6 "
           onClick={() => canApply(params?.jobId)}
         >
-          {!filters.includes(params?.jobId)
+          {!items.includes(params?.jobId)
             ? "Apply For this Job"
             : "Already Applied"}
         </Button>
@@ -95,5 +92,4 @@ function JobDetails() {
     </>
   );
 }
-
 export default JobDetails;

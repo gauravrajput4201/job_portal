@@ -16,11 +16,7 @@ export default function JobList(props: { data: any[] }) {
   const searchQuery = useStore((state) => state.searchQuery);
   const setSearchQuery = useStore((state) => state.setSearchQuery);
   const filters = useStore((state) => state.filters);
-  const [search, setSearch] = useState<any>(searchQuery || "")
-
-
-  // console.log(filterData, "filterData");
-  // console.log(filters, "filters");
+  const [search, setSearch] = useState<any>(searchQuery || "");
 
   const startIndex = (Number(searchParam) - 1) * 5;
   const endIndex = startIndex + 5;
@@ -46,9 +42,6 @@ export default function JobList(props: { data: any[] }) {
     const filterData = filterByTitle(data, filters)
     setDatas(filterData);
   }, [filters]);
-
-
-
   return (
     <>
       <div className="w-full  mb-4">
@@ -76,7 +69,7 @@ export default function JobList(props: { data: any[] }) {
         </div>
       </div>
       {datas?.length > 0 ? (
-        datas.slice(startIndex, endIndex).map((item: any) => (
+        datas?.slice(startIndex, endIndex)?.map((item: any) => (
           <Card className="w-full p-5 mb-3" key={item?.id}>
             <div className="flex   gap-3 flex-col sm:flex-row sm:items-center sm:justify-between">
               <div className="flex gap-4">
@@ -127,7 +120,7 @@ export default function JobList(props: { data: any[] }) {
           </Card>
         ))
       ) : (
-        <div className="text-2xl">No jobs Found</div>
+        <div className="text-2xl text-center mt-6">No jobs Found</div>
       )}
       {
         datas?.length ? <PaginationWithLinks

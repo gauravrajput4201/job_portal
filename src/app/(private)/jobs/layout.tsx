@@ -1,4 +1,6 @@
-import Navbar from "@/components/navbar/navbar";
+// import Navbar from "@/components/navbar";
+
+import Navbar from "@/components/navbar";
 
 const Jobs = ({ children }: any) => {
   return (

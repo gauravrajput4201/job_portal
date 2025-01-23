@@ -34,8 +34,8 @@ export default function ApplyForm(props: any) {
   const router = useRouter();
   const { jobId } = props;
   const [files, setFiles] = useState<File[] | null>(null);
-  const filters = useStore((state) => state.filters);
-  const addFilter = useStore((state) => state.addFilter);
+  const items = useStore((state) => state.items);
+  const addItem = useStore((state) => state.addItem);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,8 +53,8 @@ export default function ApplyForm(props: any) {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      if (!filters.includes(jobId)) {
-        addFilter(jobId);
+      if (!items.includes(jobId)) {
+        addItem(jobId);
 
         toast.success("job apply successfully");
         router.push("/jobs");

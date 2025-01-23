@@ -9,7 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export function BreadcrumbWithCustomSeparator() {
+export function BreadcrumbWithCustomSeparator({ title }: any) {
   return (
     <div>
       <Breadcrumb className="w-full p-8  lg:px-20 py-4 bg-gray-100">
@@ -21,7 +21,7 @@ export function BreadcrumbWithCustomSeparator() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink>Job Details</BreadcrumbLink>
+            <BreadcrumbLink>{title}</BreadcrumbLink>
           </BreadcrumbItem>
           {/* <BreadcrumbSeparator />
         <BreadcrumbItem>
