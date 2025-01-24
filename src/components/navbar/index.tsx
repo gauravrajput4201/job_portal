@@ -15,7 +15,7 @@ export default function Navbar() {
   const getName = getNamePrefix(session?.user?.name)
   return (
     <nav className="flex justify-between items-center py-3 px-4 bg-white shadow-md">
-      <Link href="/" className="text-xl font-bold">
+      <Link href="/jobs" className="text-xl font-bold">
         Job Portal
       </Link>
 
