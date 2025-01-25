@@ -8,8 +8,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     GoogleProvider,
     GitHubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
     }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
