@@ -131,6 +131,17 @@ export default function SignIn() {
             <Github />
             SignIn with Github
           </Button>
+          <Button variant="outline"
+            onClick={() =>
+              signIn("google", {
+                redirectTo: "/",
+              })
+            }
+            className="w-full"
+          >
+            <Github />
+            SignIn with Github
+          </Button>
 
         </CardContent>
       </Card>
