@@ -6,7 +6,6 @@ import { redirect, useParams } from "next/navigation";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import useStore from "@/store/store";
-// import { const } from './../../../api/auth/[...nextauth]/route';
 import { filterByIds } from "@/utils/utility";
 import { Card } from "@/components/ui/card";
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
