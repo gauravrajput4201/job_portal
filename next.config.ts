@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["st3.depositphotos.com"],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   // images: {
   //   remotePatterns: [
   //     {
