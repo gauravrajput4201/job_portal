@@ -2,9 +2,9 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 interface StoreState {
-  items: string[]; // General items
-  filters: string[]; // Selected filters
-  searchQuery: string; // Search query string
+  items: string[];
+  filters: string[];
+  searchQuery: string;
   setItems: (newItems: string[]) => void;
   setFilters: (newFilters: string[]) => void;
   setSearchQuery: (query: string) => void;
@@ -12,6 +12,7 @@ interface StoreState {
   removeItem: (item: string) => void;
   addFilter: (filter: string) => void;
   removeFilter: (filter: string) => void;
+  reset: () => void;
 }
 
 const useStore = create<StoreState>()(
@@ -44,6 +45,12 @@ const useStore = create<StoreState>()(
         set((state) => ({
           filters: state.filters.filter((f) => f !== filter),
         })),
+      reset: () =>
+        set({
+          items: [],
+          filters: [],
+          searchQuery: "",
+        }),
     }),
     {
       name: "items-storage", // Name of the storage in localStorage

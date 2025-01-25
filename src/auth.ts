@@ -43,7 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     authorized: async ({ auth, request }) => {
       if (request.nextUrl.pathname == "/login" && auth?.user) {
         console.log("sdsjndj");
-        return Response.redirect(new URL("/jobs", request.nextUrl));
+        return Response.redirect(new URL("/", request.nextUrl));
         // return false;
       } else if (request.nextUrl.pathname != "/login" && !auth?.user) {
         return false;

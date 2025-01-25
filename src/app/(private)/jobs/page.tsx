@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Filter, Search } from "lucide-react";
 import useSWR from "swr";
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import { BreadcrumbWithCustomSeparator } from "@/components/common/breadCrumb";
 
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
 export default function Jobs() {
@@ -34,6 +35,7 @@ export default function Jobs() {
 
   return (
     <>
+      <BreadcrumbWithCustomSeparator labels={"Jobs"} />
       <div className=" min-h-screen p-8 pb-20  lg:p-20 lg:flex lg:gap-16 ">
         <div className="hidden lg:basis-56 lg:block">
           <Filters filterArr={filterArr} />

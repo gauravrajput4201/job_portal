@@ -8,21 +8,34 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+interface BreadcrumbProps {
+  title?: string;
+  labels?: string; // Optional parameter
+}
 
-export function BreadcrumbWithCustomSeparator({ title }: any) {
+export function BreadcrumbWithCustomSeparator({ title, labels }: BreadcrumbProps) {
   return (
     <div>
       <Breadcrumb className="w-full p-8  lg:px-20 py-4 bg-gray-100">
         <BreadcrumbList>
           <BreadcrumbItem>
             {/* <BreadcrumbLink> */}
-            <Link href="/jobs">Home</Link>
+            <Link href="/">Home</Link>
             {/* </BreadcrumbLink> */}
           </BreadcrumbItem>
-          <BreadcrumbSeparator />
+          {title ? (<><BreadcrumbSeparator /><BreadcrumbItem>
+            <Link href="/jobs">{title}</Link>
+          </BreadcrumbItem></>) : ""}
+          {/* <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink>{title}</BreadcrumbLink>
-          </BreadcrumbItem>
+            <Link href="/jobs">{title}</Link>
+          </BreadcrumbItem> */}
+
+          {labels ? (<><BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{labels}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </>) : ""}
           {/* <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>

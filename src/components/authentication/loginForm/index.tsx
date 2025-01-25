@@ -1,34 +1,4 @@
-// "use client";
 
-// import React from "react";
-// import { Button } from "@/components/ui/button";
-// import { signIn, signOut } from "next-auth/react";
-// import { Github } from "lucide-react";
-
-// const LoginForm = () => {
-//   return (
-//     <>
-//       <div className=" border border-gray-400 rounded-sm p-6 max-w-sm mx-auto mt-12">
-//         <Button variant="outline"
-//           onClick={() =>
-//             signIn("github", {
-//               redirectTo: "/jobs",
-//             })
-//           }
-//           className="w-full"
-//         >
-//           <Github />
-//           SignIn with Github
-//         </Button>
-//         {/* <Button onClick={() => signOut()} variant="outline" className="w-full">
-//           Sign out
-//         </Button> */}
-//       </div>
-//     </>
-//   );
-// };
-
-// export default LoginForm;
 
 "use client";
 
@@ -43,20 +13,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-// import { GitHubLogoIcon } from "@radix-ui/react-icons";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-// import { signInSchema } from "@/lib/zod";
-// import LoadingButton from "@/components/loading-button";
-// import {
-//   handleCredentialsSignin,
-//   handleGithubSignin,
-// } from "@/app/actions/authActions";
 import { useState } from "react";
-// import ErrorMessage from "@/components/error-message";
 import { Button } from "@/components/ui/button";
 
 import { object, string } from "zod";
@@ -89,19 +50,10 @@ export default function SignIn() {
     const response: any = await signIn("credentials", {
       email,
       password,
-      redirectTo: "/jobs"
+      redirectTo: "/"
       // redirectTo: "/jobs"
     });
-    console.log({ response });
-    // if (response.ok) {
-    //   redirect(`/jobs`)
-    // }
 
-    // if (!response.ok) {
-    //   throw new Error("Network response was not ok");
-    // }
-    // Process response here
-    // console.log("Login Successful", response);
     toast.success("Login Successful");
 
   };
@@ -157,10 +109,6 @@ export default function SignIn() {
                 )}
               />
 
-              {/* Submit button will go here */}
-              {/* <LoadingButton
-                pending={form.formState.isSubmitting}
-              /> */}
               <Button
 
                 className="w-full"
@@ -177,7 +125,7 @@ export default function SignIn() {
           <Button variant="outline"
             onClick={() =>
               signIn("github", {
-                redirectTo: "/jobs",
+                redirectTo: "/",
               })
             }
             className="w-full"

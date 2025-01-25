@@ -21,7 +21,7 @@ function AppliedJob() {
     const filterData: any = filterByIds(data, filters)
     return (
         <>
-            <BreadcrumbWithCustomSeparator title={"Applied Job"} />
+            <BreadcrumbWithCustomSeparator title={"jobs"} labels="Applied Job" />
             <div className=" p-8  lg:px-20">
                 {filterData?.length > 0 ? (
                     filterData.map((item: any) => (

@@ -36,7 +36,7 @@ function JobDetails() {
   console.log(data, data);
   return (
     <>
-      <BreadcrumbWithCustomSeparator title={"Job Details"} />
+      <BreadcrumbWithCustomSeparator title={"Jobs"} labels="Job Details" />
       <div className="flex sm:justify-between sm:items-center flex-col sm:flex-row  sm:gap-3 p-8  lg:px-20 bg-[#e8f2f1] py-14  ">
         <div className="flex gap-4">
           <div>
