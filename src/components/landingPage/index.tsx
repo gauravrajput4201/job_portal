@@ -9,7 +9,7 @@ export default function LandingPage() {
         <div className="relative h-screen w-full overflow-hidden bg-[#eaedff]">
             <div className="h-full grid place-items-center ">
                 <div className="space-y-8 w-11/12">
-                    <h1 className="text-4xl font-bold tracking-tight text-[#28395a] sm:text-5xl md:text-6xl">
+                    <h1 className="text-4xl font-bold tracking-tight text-[#28395a] sm:text-5xl md:text-6xl text-center">
                         Find the most exciting Startup jobs
                     </h1>
                     <div className="grid place-items-center">
